@@ -11,10 +11,13 @@ var savedPosterSection = document.querySelector('.saved-posters')
 var backToMains = document.querySelector('.back-to-main')
 var nvmButton = document.querySelector('.show-main')
 var showMyPosterButton = document.querySelector('.make-poster')
+var displaySavedPoster = document.querySelector('.saved-posters-grid')
 
 var formImage = document.querySelector('#poster-image-url')
 var formTitle = document.querySelector('#poster-title')
 var formQuote = document.querySelector('#poster-quote')
+var savePoster = document.querySelector('.save-poster')
+
 // we've provided you with some data to work with 👇
 var images = [
   "./assets/bees.jpg",
@@ -124,6 +127,7 @@ showSavedPosterButton.addEventListener('click', showSavedPosters)
 backToMains.addEventListener('click', backToMain)
 nvmButton.addEventListener('click', nvmGoBack)
 showMyPosterButton.addEventListener('click', makeYourOwnPoster)
+savePoster.addEventListener('click', showSavedMiniPoster)
 // functions and event handlers go here 👇
 // (we've provided one for you to get you started)!
 function getRandomIndex(array) {
@@ -183,11 +187,30 @@ hiddenPoster.classList.add('hidden')
 
 function makeYourOwnPoster(){
   event.preventDefault()
-  var coverImage = formImage.value 
+  var coverImage = formImage.value
   var coverTitle = formTitle.value
   var coverQuote = formQuote.value
   currentPoster = new Poster(coverImage, coverTitle, coverQuote)
   loadNewPoster()
   mainPoster.classList.remove('hidden')
   hiddenPoster.classList.add('hidden')
+}
+
+function saveAPosters(){
+  console.log('helllo')
+  if(!savedPosters.includes(currentPoster)){
+    savedPosters.push(currentPoster)
+  }
+}
+function showSavedMiniPoster(){
+  displaySavedPoster.innerHTML = ''
+  for(var i = 0; i < savedPosters.length; i++){
+    displaySavedPoster.innerHTML +=
+    `<section class='mini-poster' id= '${savedPosters[i].id}'>
+    <img class="mini-poster" src="${savedPosters[i].imageURL}" alt="nothin' to see here">
+    <h1 class="title">"${savedPosters[i].title}"</h1>
+    <h3 class="quote">"${savedPosters[i].quote}"</h3>
+    </section>`
+  }
+
 }
