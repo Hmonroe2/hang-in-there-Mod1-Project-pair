@@ -212,5 +212,5 @@ function showSavedMiniPoster(){
     <h3 class="quote">"${savedPosters[i].quote}"</h3>
     </section>`
   }
-
+//hello
 }
