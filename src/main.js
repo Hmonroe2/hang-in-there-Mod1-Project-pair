@@ -10,6 +10,11 @@ var showSavedPosterButton = document.querySelector('.show-saved')
 var savedPosterSection = document.querySelector('.saved-posters')
 var backToMains = document.querySelector('.back-to-main')
 var nvmButton = document.querySelector('.show-main')
+var showMyPosterButton = document.querySelector('.make-poster')
+
+var formImage = document.querySelector('#poster-image-url')
+var formTitle = document.querySelector('#poster-title')
+var formQuote = document.querySelector('#poster-quote')
 // we've provided you with some data to work with 👇
 var images = [
   "./assets/bees.jpg",
@@ -118,6 +123,7 @@ makeAPosterButton.addEventListener('click', showForm)
 showSavedPosterButton.addEventListener('click', showSavedPosters)
 backToMains.addEventListener('click', backToMain)
 nvmButton.addEventListener('click', nvmGoBack)
+showMyPosterButton.addEventListener('click', makeYourOwnPoster)
 // functions and event handlers go here 👇
 // (we've provided one for you to get you started)!
 function getRandomIndex(array) {
@@ -133,7 +139,6 @@ currentPoster = new Poster(
   )
 }
 function loadNewPoster(){
-  console.log(currentPoster.image)
   posterImage.src = currentPoster.imageURL
   posterTitle.innerText = currentPoster.title
   posterQuote.innerText = currentPoster.quote
@@ -143,10 +148,21 @@ function loadRandomPoster(){
   randomPoster()
   loadNewPoster()
 }
-
+function hideElements(elements){
+  for (var i = 0; i < elements.length; i++){
+    elements[i].classList.add(`hidden`)
+  }
+function unhideElements(elements){
+  for (var i = 0; i < elements.length ; i++){
+    elements[i].classList.remove('hidden')
+  }
+}
+}
 function showForm(){
-  hiddenPoster.classList.remove("hidden")
-  mainPoster.classList.add("hidden")
+  hideElements([mainPoster])
+  // unhideElements([hiddenPoster])
+   hiddenPoster.classList.remove("hidden")
+   // mainPoster.classList.add("hidden")
 
 }
 
@@ -163,4 +179,15 @@ function backToMain(){
 function nvmGoBack(){
 mainPoster.classList.remove("hidden")
 hiddenPoster.classList.add('hidden')
+}
+
+function makeYourOwnPoster(){
+  event.preventDefault()
+  var coverImage = formImage.value 
+  var coverTitle = formTitle.value
+  var coverQuote = formQuote.value
+  currentPoster = new Poster(coverImage, coverTitle, coverQuote)
+  loadNewPoster()
+  mainPoster.classList.remove('hidden')
+  hiddenPoster.classList.add('hidden')
 }
