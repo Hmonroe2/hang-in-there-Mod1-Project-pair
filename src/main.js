@@ -1,4 +1,4 @@
-// query selector variables go here 👇
+
 var posterImage = document.querySelector('.poster-img')
 var posterTitle = document.querySelector('.poster-title')
 var posterQuote = document.querySelector('.poster-quote')
@@ -18,7 +18,6 @@ var formQuote = document.querySelector('#poster-quote')
 var savePoster = document.querySelector('.save-poster')
 var miniPoster = document.querySelectorAll(".mini-poster")
 
-// we've provided you with some data to work with 👇
 var images = [
   "./assets/bees.jpg",
   "./assets/bridge.jpg",
@@ -119,7 +118,6 @@ var quotes = [
 var savedPosters = [];
 var currentPoster;
 
-// event listeners go here 👇
 window.addEventListener('load', loadRandomPoster)
 showRandButton.addEventListener('click', loadRandomPoster)
 makeAPosterButton.addEventListener('click', showForm)
@@ -130,9 +128,6 @@ showMyPosterButton.addEventListener('click', makeYourOwnPoster)
 savePoster.addEventListener('click', saveAPosters)
 showSavedPosterButton.addEventListener(`click`, showSavedMiniPoster)
 
-
-// functions and event handlers go here 👇
-// (we've provided one for you to get you started)!
 function getRandomIndex(array) {
   var printArray = Math.floor(Math.random() * array.length);
   return array[printArray]
@@ -219,21 +214,20 @@ function saveAPosters() {
     savedPosters.push(currentPoster)
   }
 }
-function findMiniPoster(){
+
+function findMiniPoster() {
   var miniPoster = document.querySelectorAll(".mini-poster")
-  for(var i = 0; i < miniPoster.length; i++){
+  for (var i = 0; i < miniPoster.length; i++) {
     miniPoster[i].addEventListener("dblclick", deleteSavedMiniPosters)
 
   }
 }
 
-function deleteSavedMiniPosters(event){
-  event.preventDefault(event)
-  console.log(`deleteMe`)
-  for (var i = 0; i < savedPosters.length; i++){
-    if (event.currentTarget.id == savedPosters[i].id){
-      savedPosters.splice(i ,1)
+function deleteSavedMiniPosters(event) {
+  for (var i = 0; i < savedPosters.length; i++) {
+    if (event.currentTarget.id == savedPosters[i].id) {
+      savedPosters.splice(i, 1)
     }
     showSavedMiniPoster()
-    }
+  }
 }
