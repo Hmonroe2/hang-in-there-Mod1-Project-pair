@@ -129,7 +129,7 @@ nvmButton.addEventListener('click', nvmGoBack)
 showMyPosterButton.addEventListener('click', makeYourOwnPoster)
 savePoster.addEventListener('click', saveAPosters)
 showSavedPosterButton.addEventListener(`click`, showSavedMiniPoster)
-miniPoster.addEventListener("dblclick", deleteSavedMiniPosters)
+
 
 // functions and event handlers go here 👇
 // (we've provided one for you to get you started)!
@@ -222,18 +222,18 @@ function saveAPosters() {
 function findMiniPoster(){
   var miniPoster = document.querySelectorAll(".mini-poster")
   for(var i = 0; i < miniPoster.length; i++){
-    event.miniPoster[i]
-    console.log(`hey im find miniPoster`)
+    miniPoster[i].addEventListener("dblclick", deleteSavedMiniPosters)
+
   }
 }
 
 function deleteSavedMiniPosters(event){
-  event.preventDefault()
+  event.preventDefault(event)
+  console.log(`deleteMe`)
   for (var i = 0; i < savedPosters.length; i++){
-    if (event.currentTarget.id === savedPosters[i].id){
-      console.log(event.currentTarget.id)
+    if (event.currentTarget.id == savedPosters[i].id){
       savedPosters.splice(i ,1)
     }
-  }
-
+    showSavedMiniPoster()
+    }
 }
